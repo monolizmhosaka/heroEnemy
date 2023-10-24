@@ -1,4 +1,6 @@
-﻿#include <iostream>
+﻿#define _CRT_SECURE_NO_WARNINGS
+
+#include <iostream>
 #include <cstdlib>
 #include <cstring>
 using namespace std;
@@ -68,6 +70,8 @@ public:
     Enemy(char* pName, int hp);
     ~Enemy();
 
+    void operator*(const int i);
+
 public:
     int getDiffence() { return _diffence; }
     int getHp() { return _hp; }
@@ -87,6 +91,13 @@ private:
     int _attack = 75;
     int _diffence = 20;
 };
+
+void Enemy::operator*(const int i)
+{
+    _hp *= i;
+    _attack *= i;
+    _diffence *= i;
+}
 
 // コンストラクタ
 Enemy::Enemy(char* pName, int hp) {
@@ -119,40 +130,40 @@ void Enemy::show() {
 }
 
 
+//
+//Hero InputHeroStatus() {
+//    char name[MAX_NAME]{ "" };
+//    int hp = 0;
+//
+//    printf("ヒーロー名を入力\n> ");
+//    cin >> name;
+//    printf("HPを入力\n> ");
+//    cin >> hp;
+//
+//    Hero hero(&name[0], hp);
+//
+//    // ステータス表示
+//    hero.show();
+//
+//    return hero;
+//}
 
-Hero InputHeroStatus() {
-    char name[MAX_NAME]{ "" };
-    int hp = 0;
-
-    printf("ヒーロー名を入力\n> ");
-    cin >> name;
-    printf("HPを入力\n> ");
-    cin >> hp;
-
-    Hero hero(&name[0], hp);
-
-    // ステータス表示
-    hero.show();
-
-    return hero;
-}
-
-Enemy InputEnemyStatus() {
-    char name[MAX_NAME]{ "" };
-    int hp = 0;
-
-    printf("エネミー名を入力\n> ");
-    cin >> name;
-    printf("HPを入力\n> ");
-    cin >> hp;
-
-    Enemy enemy(&name[0], hp);
-
-    // ステータス表示
-    enemy.show();
-
-    return enemy;
-}
+//Enemy InputEnemyStatus() {
+//    char name[MAX_NAME]{ "" };
+//    int hp = 0;
+//
+//    printf("エネミー名を入力\n> ");
+//    cin >> name;
+//    printf("HPを入力\n> ");
+//    cin >> hp;
+//
+//    Enemy enemy(&name[0], hp);
+//
+//    // ステータス表示
+//    enemy.show();
+//
+//    return enemy;
+//}
 
 void Hero::attack(Enemy* enemy) {
     int deffence = enemy->getDiffence();
@@ -197,8 +208,31 @@ void Enemy::heal() {
 int main()
 {
     bool turn = false;
-    Hero hero = InputHeroStatus();
-    Enemy enemy = InputEnemyStatus();
+    //Hero hero = InputHeroStatus();
+    //Enemy enemy = InputEnemyStatus();
+    char name[MAX_NAME]{ "" };
+    int hp = 0;
+
+    printf("ヒーロー名を入力\n> ");
+    cin >> name;
+    printf("HPを入力\n> ");
+    cin >> hp;
+
+    Hero hero(&name[0], hp);
+
+    // ステータス表示
+    hero.show();
+
+    printf("エネミー名を入力\n> ");
+    cin >> name;
+    printf("HPを入力\n> ");
+    cin >> hp;
+
+    Enemy enemy(&name[0], hp);
+
+    // ステータス表示
+    enemy.show();
+
 
     int select = 0;
     while (true) {
